@@ -43,7 +43,7 @@ public class BookServiceImpl implements BookService{
         //Bir Book'un birden fazla kategorisi olabilir .
         // Bu yuzden birden fazla categoryId alacak bir list yolluyoruz ve bunlari categories altinda topluyoruz
         //daha sonra Book icerisine hepsini ekliyoruz .
-        Author author = authorService.findById(authorId);
+        Author author = authorService.findByAuthorId(authorId);
         List<Category> categories = categoryRepository.findAllById(categoryIds);
         book.getCategories().addAll(categories);
 
@@ -54,6 +54,7 @@ public class BookServiceImpl implements BookService{
         }
 
         author.getBookList().add(book);
+        book.setAuthor(author);
 
          bookRepository.save(book);
          return BookDtoConvertion.convertBook(book);
