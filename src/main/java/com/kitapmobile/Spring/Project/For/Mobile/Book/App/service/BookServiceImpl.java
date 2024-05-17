@@ -42,7 +42,9 @@ public class BookServiceImpl implements BookService{
         book.getCategories().addAll(categories);
 
         for (Category category : categories){
-            category.getBooks().add(book);
+            if (!category.getBooks().contains(book)){
+                category.getBooks().add(book);
+            }
         }
 
          bookRepository.save(book);

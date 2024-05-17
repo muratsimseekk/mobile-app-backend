@@ -1,5 +1,6 @@
 package com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,7 @@ public class Book {
     @Column(name = "language")
     private String language;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "books" , cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Category> categories = new ArrayList<>();
 

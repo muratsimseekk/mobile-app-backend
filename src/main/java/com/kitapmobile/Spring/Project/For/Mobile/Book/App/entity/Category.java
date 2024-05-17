@@ -1,5 +1,7 @@
 package com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +28,7 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
+    @JsonBackReference
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "category_book",
