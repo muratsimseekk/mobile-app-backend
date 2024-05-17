@@ -41,10 +41,10 @@ public class BookServiceImpl implements BookService{
         List<Category> categories = categoryRepository.findAllById(categoryIds);
         book.getCategories().addAll(categories);
 
-//        for (Category category : categories){
-//            category.getBooks().add(book);
-//        }
-//
+        for (Category category : categories){
+            category.getBooks().add(book);
+        }
+
          bookRepository.save(book);
          return BookDtoConvertion.convertBook(book);
     }
@@ -62,6 +62,13 @@ public class BookServiceImpl implements BookService{
     @Override
     public String delete(Long id) {
         Book book = findByBookId(id);
+
+        //Book'un iliskili oldugu kategorilerdeki book u remove et.
+        for (Category category : book.getCategories()){
+            category.getBooks().remove(book);
+        }
+        book.getCategories().clear();
+
          bookRepository.delete(book);
         return "Kitap silme islemi basarili.";
     }
