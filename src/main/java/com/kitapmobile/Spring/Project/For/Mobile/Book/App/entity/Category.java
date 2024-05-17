@@ -5,6 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -12,14 +17,22 @@ import lombok.NoArgsConstructor;
 @Table(name = "category" , schema = "mobile_app")
 public class Category {
 
-    @Column(name = "category_id")
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
     private  Long categoryId;
 
     @Column(name = "category_name")
     private String categoryName;
 
+    @ManyToMany
+    @JoinTable(
+            name = "category_book",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<Book> books= new ArrayList<>();
 
 
     }
