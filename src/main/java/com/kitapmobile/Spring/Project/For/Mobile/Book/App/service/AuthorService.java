@@ -1,16 +1,19 @@
 package com.kitapmobile.Spring.Project.For.Mobile.Book.App.service;
 
+import com.kitapmobile.Spring.Project.For.Mobile.Book.App.dto.AuthorResponse;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Author;
 
 import java.util.List;
 
 public interface AuthorService {
 
-    List<Author> findAll();
+    List<AuthorResponse> findAll();
 
-    Author findById(Long id);
+    AuthorResponse findById(Long id);
 
-    Author save(Author author);
+    AuthorResponse save(Author author);
+
+    Author findByAuthorId(Long id);
 
     String delete(Long id);
 
