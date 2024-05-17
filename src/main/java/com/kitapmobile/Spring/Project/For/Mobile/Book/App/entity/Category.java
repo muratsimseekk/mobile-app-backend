@@ -1,10 +1,15 @@
 package com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "category" , schema = "mobile_app")
 public class Category {
 
     @Column(name = "category_id")
@@ -15,4 +20,6 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
-}
+
+
+    }
