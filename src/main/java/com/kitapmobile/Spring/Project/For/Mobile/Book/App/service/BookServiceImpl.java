@@ -1,10 +1,12 @@
 package com.kitapmobile.Spring.Project.For.Mobile.Book.App.service;
 
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.dto.BookResponse;
+import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Author;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Book;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Category;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.exception.CommonException;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.factory.BookDtoConvertion;
+import com.kitapmobile.Spring.Project.For.Mobile.Book.App.repository.AuthorRepository;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.repository.BookRepository;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ public class BookServiceImpl implements BookService{
 
     private BookRepository bookRepository;
     private CategoryRepository categoryRepository;
+    private AuthorService authorService;
     @Override
     public List<BookResponse> findAll() {
         return BookDtoConvertion.convertBookList(bookRepository.findAll());
@@ -36,10 +39,11 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public BookResponse save(Book book , List<Long> categoryIds) {
+    public BookResponse save(Book book , List<Long> categoryIds , Long authorId) {
         //Bir Book'un birden fazla kategorisi olabilir .
         // Bu yuzden birden fazla categoryId alacak bir list yolluyoruz ve bunlari categories altinda topluyoruz
         //daha sonra Book icerisine hepsini ekliyoruz .
+        Author author = authorService.findById(authorId);
         List<Category> categories = categoryRepository.findAllById(categoryIds);
         book.getCategories().addAll(categories);
 
@@ -48,6 +52,8 @@ public class BookServiceImpl implements BookService{
                 category.getBooks().add(book);
             }
         }
+
+        author.getBookList().add(book);
 
          bookRepository.save(book);
          return BookDtoConvertion.convertBook(book);

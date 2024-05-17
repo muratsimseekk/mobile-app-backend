@@ -51,4 +51,8 @@ public class Book {
     @ManyToMany(mappedBy = "books" , cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Category> categories = new ArrayList<>();
 
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "author_id")
+    private Author author;
+
 }

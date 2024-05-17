@@ -12,7 +12,7 @@ public interface BookService {
 
     BookResponse findById(Long id);
 
-    BookResponse save(Book book , List<Long> categoryIds);
+    BookResponse save(Book book , List<Long> categoryIds , Long authorId);
 
     Book findByBookId(Long id);
 
