@@ -2,9 +2,11 @@ package com.kitapmobile.Spring.Project.For.Mobile.Book.App.service;
 
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.dto.CategoryResponse;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Category;
+import com.kitapmobile.Spring.Project.For.Mobile.Book.App.exception.CommonException;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.factory.CategoryDtoConvertion;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,8 +33,8 @@ public class CategoryServiceImpl implements CategoryService{
             return CategoryDtoConvertion.convertCategory(optional.get());
         }
 
-        //TODO Global exception yaz
-        throw new RuntimeException("Ilgili id de category bulunamadi !. ID : " +id);
+
+        throw new CommonException("Ilgili id de category bulunamadi !. ID : " +id , HttpStatus.NOT_FOUND);
 
     }
 
@@ -44,8 +46,8 @@ public class CategoryServiceImpl implements CategoryService{
         if (optional.isPresent()){
             return optional.get();
         }
-        //TODO Global exception yaz
-        throw new RuntimeException("Ilgili id de category bulunamadi !. ID : " +id);
+
+        throw new CommonException("Ilgili id de category bulunamadi !. ID : " +id , HttpStatus.NOT_FOUND);
     }
 
     @Override

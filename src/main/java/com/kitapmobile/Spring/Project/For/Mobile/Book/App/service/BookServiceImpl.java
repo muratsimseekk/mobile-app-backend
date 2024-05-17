@@ -3,10 +3,12 @@ package com.kitapmobile.Spring.Project.For.Mobile.Book.App.service;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.dto.BookResponse;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Book;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Category;
+import com.kitapmobile.Spring.Project.For.Mobile.Book.App.exception.CommonException;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.factory.BookDtoConvertion;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.repository.BookRepository;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class BookServiceImpl implements BookService{
         if(optional.isPresent()){
             return BookDtoConvertion.convertBook(optional.get());
         }
-        throw new RuntimeException("Girilen id de kitap bulunamadi. ID: " + id);
+        throw new CommonException("Girilen id de kitap bulunamadi. ID: " + id , HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -58,7 +60,7 @@ public class BookServiceImpl implements BookService{
         if (optional.isPresent()){
             return optional.get();
         }
-        throw new RuntimeException("Girilen id de kitap bulunamadi. ID: " + id);
+        throw new CommonException("Girilen id de kitap bulunamadi. ID: " + id , HttpStatus.NOT_FOUND);
     }
 
     @Override
