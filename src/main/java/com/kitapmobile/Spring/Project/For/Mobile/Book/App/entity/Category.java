@@ -26,7 +26,7 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "category_book",
             joinColumns = @JoinColumn(name = "category_id"),

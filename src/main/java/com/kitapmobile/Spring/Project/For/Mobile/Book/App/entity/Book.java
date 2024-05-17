@@ -46,7 +46,7 @@ public class Book {
     @Column(name = "language")
     private String language;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books" , cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Category> categories = new ArrayList<>();
 
 }
