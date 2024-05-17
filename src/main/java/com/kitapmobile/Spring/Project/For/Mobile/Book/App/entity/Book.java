@@ -9,17 +9,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "book",schema = "mobile-app")
+@Table(name = "book",schema = "mobile_app")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "book_name")
     private String bookName;
 
     @Column(name = "estimated_time")
     private String estimatedTime;
+
 }
