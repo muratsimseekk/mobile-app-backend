@@ -4,6 +4,7 @@ import com.kitapmobile.Spring.Project.For.Mobile.Book.App.dto.BookResponse;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Author;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Book;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Category;
+import com.kitapmobile.Spring.Project.For.Mobile.Book.App.entity.Translator;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.exception.CommonException;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.factory.BookDtoConvertion;
 import com.kitapmobile.Spring.Project.For.Mobile.Book.App.repository.AuthorRepository;
@@ -24,6 +25,7 @@ public class BookServiceImpl implements BookService{
     private BookRepository bookRepository;
     private CategoryRepository categoryRepository;
     private AuthorService authorService;
+    private TranslatorService translatorService;
     @Override
     public List<BookResponse> findAll() {
         return BookDtoConvertion.convertBookList(bookRepository.findAll());
@@ -39,12 +41,15 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public BookResponse save(Book book , List<Long> categoryIds , Long authorId) {
+    public BookResponse save(Book book , List<Long> categoryIds , Long authorId , Long translatorId) {
         //Bir Book'un birden fazla kategorisi olabilir .
         // Bu yuzden birden fazla categoryId alacak bir list yolluyoruz ve bunlari categories altinda topluyoruz
         //daha sonra Book icerisine hepsini ekliyoruz .
+
         Author author = authorService.findByAuthorId(authorId);
         List<Category> categories = categoryRepository.findAllById(categoryIds);
+        Translator translator = translatorService.findById(translatorId);
+
         book.getCategories().addAll(categories);
 
         for (Category category : categories){
@@ -55,6 +60,9 @@ public class BookServiceImpl implements BookService{
 
         author.getBookList().add(book);
         book.setAuthor(author);
+
+        translator.getBooks().add(book);
+        book.setTranslator(translator);
 
          bookRepository.save(book);
          return BookDtoConvertion.convertBook(book);
