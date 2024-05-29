@@ -28,7 +28,7 @@ public class TranslatorServiceImpl implements TranslatorService{
             return optional.get();
         }
 
-        throw new CommonException("Girilen id de bir çevirmen bulunamadı . ID : ",id , HttpStatus.NOT_FOUND);
+        throw new CommonException("Girilen id de bir çevirmen bulunamadı . ID : "+ id , HttpStatus.NOT_FOUND);
 
     }
 
@@ -44,7 +44,7 @@ public class TranslatorServiceImpl implements TranslatorService{
             translatorRepository.delete(optional.get());
             return "Çevirmen silme işlemi başarı ile gerçekleşti .";
         }
-        throw new CommonException("Girilen id de bir çevirmen bulunamadı . ID : ",id , HttpStatus.NOT_FOUND);
+        throw new CommonException("Girilen id de bir çevirmen bulunamadı . ID : "+id , HttpStatus.NOT_FOUND);
     }
 
 }
