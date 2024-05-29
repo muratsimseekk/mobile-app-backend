@@ -16,6 +16,4 @@ public interface AuthorService {
     Author findByAuthorId(Long id);
 
     String delete(Long id);
-
-
 }
