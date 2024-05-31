@@ -28,8 +28,9 @@ public class BookController {
 
     //POST /books?categoryIds=1&categoryIds=2&categoryIds=3 bu tarz bir istek ile birden fazla category id si yollayip book a save edebiliriz.
     @PostMapping("/books")
-    public BookResponse save(@RequestBody Book book , @RequestParam List<Long> categoryIds ,@RequestParam Long author_id){
-        return bookService.save(book , categoryIds , author_id);
+    public BookResponse save(@RequestBody Book book , @RequestParam List<Long> categoryIds
+            ,@RequestParam Long author_id , @RequestParam Long translatorId){
+        return bookService.save(book , categoryIds , author_id , translatorId);
     }
 
     @DeleteMapping("/{id}")
