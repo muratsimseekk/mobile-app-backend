@@ -19,7 +19,6 @@ import java.util.Set;
 @Table(name = "category" , schema = "mobile_app")
 public class Category {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")

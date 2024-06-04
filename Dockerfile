@@ -7,7 +7,7 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:17-jdk-slim
 
-EXPOSE 8080
+EXPOSE 8090
 
 COPY --from=build /target/Spring-Project-For-Mobile-Book-App-1.jar app.jar
 
