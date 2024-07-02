@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/translator")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class TranslatorController {
 
     private TranslatorService translatorService;

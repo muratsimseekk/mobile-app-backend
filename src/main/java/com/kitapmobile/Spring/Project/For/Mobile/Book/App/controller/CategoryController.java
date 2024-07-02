@@ -12,6 +12,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/category")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class CategoryController {
 
     private CategoryService categoryService;
