@@ -16,6 +16,7 @@ public class TranslatorController {
 
     private TranslatorService translatorService;
 
+
     @GetMapping("/")
     public List<Translator> findAll(){
         return translatorService.findAll();
